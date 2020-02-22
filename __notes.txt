@@ -1,0 +1,26 @@
+github.com:pixelpiloten/coder_drupal.git
+DOCKER_MODS=linuxserver/mods:code-server-docker|linuxserver/mods:code-server-nodejs
+
+or
+
+https://github.com/LER0ever/EvDev
+
+docker build -t testcoder --no-cache .
+
+docker run -p 127.0.0.1:8080:8080 -v "${PWD}:/project" testcoder code-server --auth none
+
+
+docker run -p 127.0.0.1:8080:8080 -v "${PWD}:/project" ler0ever/evdev code-server --auth none
+
+```docker build . -t ssr``` returns size on image
+
+ls -lah ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2
+
+
+
+coderaiser/cloudcmd
+
+
+composer_packages:
+  - friendsofphp/php-cs-fixer
+  - laravel/installer

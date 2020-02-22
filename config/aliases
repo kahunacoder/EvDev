@@ -1,0 +1,97 @@
+echo "Reading ~/.aliases"
+
+
+sgs () { mosh bk@s.kc.gs -- sh -c 'tmux a -t staging || tmux new -s staging';}
+
+alias adp='ansible-playbook -i ./hosts deploy.yml -vv'
+alias adt='ansible-playbook -i ./hosts delete.yml -vv'
+
+alias zf-1.10.4=/usr/local/bin/zf-1.10.4.sh
+alias zf-1.11.2=/usr/local/bin/zf-1.11.2.sh
+alias t='todo.sh -d /Users/gts/.todo.cfg '
+alias pv='projectview'
+
+alias gi='git init; printf ".DS_Store\nThumbs.db\n._*\n" >> .gitignore'
+
+alias edit='code -w'
+
+alias vup='vagrant up'
+alias vupr='vagrant up --provider=rackspace'
+alias vuprd='vagrant up  --debug --provider=rackspace'
+alias vupd='vagrant up --debug'
+alias vssh='vagrant ssh'
+alias vdestroy='vagrant destroy -f'
+alias vdup='vagrant destroy -f && vagrant up'
+alias vr='vagrant reload'
+alias vh='vagrant halt'
+alias vp='vagrant provision'
+alias vs='vagrant suspend'
+
+alias vp64='vagrant package --output=lamp64.box'
+alias vpLemp='vagrant package --output=../lempstack.box'
+alias vp32='vagrant package --output=lamp32.box'
+alias vup64='vagrant box add --force lamp64 /Volumes/BigDaddy/Projects/dsi/rdesign/bitbucket/LampStack/lamp64.box'
+alias vupLemp='vagrant box add --force lempstack /Users/gts/Documents/Projects/kc/KahunaCoding\ Staging\ Server/lempstack.box'
+
+alias vnpmi='vagrant exec npm install'
+alias vbi='vagrant exec bower install'
+alias vg='vagrant exec grunt'
+alias vgw='vagrant exec grunt watch'
+alias vga='vagrant exec grunt assemble'
+alias vgs='vagrant exec grunt stylus'
+alias vgu='vagrant exec gulp'
+alias vguw='vagrant exec gulp watch'
+alias vgua='vagrant exec gulp assemble'
+alias vgus='vagrant exec gulp stylus'
+alias vdep='vagrant exec "cd deploy && phploy"'
+
+alias velog='vagrant exec tail -F logs/error.log'
+alias vselog='vagrant exec tail -F /var/log/apache2/error.log'
+
+alias cra='cordova run android'
+alias cb='cordova build'
+alias cba='cordova build android'
+alias cbi='cordova build ios'
+alias cpre='cordova prepare'
+alias cprea='cordova prepare android'
+alias cprei='cordova prepare ios'
+alias cei='cordova emulate ios'
+alias cea='cordova run android'
+alias dba='ddms'
+
+alias asdk='/Users/gts/Library/Android/sdk/tools/android sdk'
+alias avd='/Users/gts/Library/Android/sdk/tools/android avd'
+alias adb='/Users/gts/Library/Android/sdk/platform-tools/adb'
+
+alias qdi='quasar dev ios'
+alias qda='quasar dev mat'
+alias qdmp='quasar dev mat --play'
+alias ql='quasar new -l' # get available Component templates
+alias qnc='quasar new component' # generate .vue file from a Component template
+alias qnl='quasar new layout'
+alias qs='quasar serve'
+alias qb='quasar build'
+alias qbm='quasar build mat'
+alias qbi='quasar build ios'
+alias qc='quasar clean' # clean up the build assets
+alias qei='quasar build ios && cordova emulate ios'
+alias qea='quasar build mat && cordova run android'
+
+alias dcup='docker-compose up -d'
+alias dgulp='docker-compose run --rm gulp'
+alias dnpm='docker-compose run --rm npm'
+alias dart='docker-compose run --rm artisan'
+alias dcomp='docker-compose run --rm composer'
+alias dartm='docker-compose run --rm artisan migrate'
+
+alias dwsr='docker-compose exec workspace bash'
+alias dws='docker-compose exec --user=laradock workspace bash'
+alias dunpm='docker-compose up -d nginx mariadb node'
+
+alias gw='gittower /Users/gts/Documents/Projects/Server/wikikaukau/web'
+
+alias homestead='function __homestead() { (cd ~/Homestead && vagrant $*); unset -f __homestead; }; __homestead'
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+
+alias nbd='netbook.sh'
+alias nbs='ssh gts@192.168.1.34'
