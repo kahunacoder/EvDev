@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo 'Installing ruby w/rbenv and gems...'
+echo "\e[32m######################### Installing RUBY w/RBENV and GLOBAL GEMS #########################\e[0m"
 # apt-get update
 # apt-get install -y ruby-full rubygems
 

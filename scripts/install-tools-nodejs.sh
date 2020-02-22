@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "\e[32m############################ Installing NODE.JS and YARN w/GLOBALS ############################\e[0m"
 # Install Node.js
 curl -sL https://deb.nodesource.com/setup_12.x | bash -
 

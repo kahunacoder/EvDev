@@ -5,12 +5,19 @@ or
 
 https://github.com/LER0ever/EvDev
 
-docker build -t testcoder --no-cache .
+docker build -t registry.kc.gs/kc-code --no-cache .
 
-docker run -p 127.0.0.1:8080:8080 -v "${PWD}:/project" testcoder code-server --auth none
+docker run -p 127.0.0.1:8080:8080 -v "${PWD}:/project" --name="kc-code" registry.kc.gs/kc-code code-server --auth none
 
+docker push registry.kc.gs/portfolio-app
 
-docker run -p 127.0.0.1:8080:8080 -v "${PWD}:/project" ler0ever/evdev code-server --auth none
+fc-list | grep "Firicico"
+fc-list | grep "Fira Code Regular Nerd Font Complete"
+
+Fira Code
+
+Fira Code Regular Nerd Font Complete
+docker run -p 127.0.0.1:8080:8080  -v "${PWD}:/project" ler0ever/evdev code-server --auth none
 
 ```docker build . -t ssr``` returns size on image
 
