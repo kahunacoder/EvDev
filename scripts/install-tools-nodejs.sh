@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "\e[32m############################ Installing NODE.JS and YARN w/GLOBALS ############################\e[0m"
+echo "\e[33m############################ Installing NODE.JS and YARN ############################"
 # Install Node.js
 curl -sL https://deb.nodesource.com/setup_12.x | bash -
 
@@ -10,5 +10,4 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.lis
 
 apt-get update && apt-get install -y yarn nodejs
 
-# yarn --global config set user root
-yarn global add webpack "@vue/cli" browserify cordova cordova-icon cordova-splash csslint emma-cli eslint eslint-plugin-vue fs jshint n nib npm prettier quasar-cli readline rupture standard stylint typographic wt-cli commitizen
+echo "\e[32m############################ NODE.JS and YARN INSTALLED ############################\e[0m"

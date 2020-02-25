@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo "\e[32m############################## Installing DEV TOOLS ##############################\e[0m"
+echo "\e[33m############################## Installing DEV TOOLS ##############################"
 
 apt-get update
-apt-get -y install git build-essential curl wget gnupg2 xz-utils openssl net-tools
+apt-get -y install build-essential pass xz-utils openssl net-tools
+
+echo "\e[32m############################## DEV TOOLS INSTALLED ##############################\e[0m"

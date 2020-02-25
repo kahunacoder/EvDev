@@ -1,15 +1,28 @@
 github.com:pixelpiloten/coder_drupal.git
 DOCKER_MODS=linuxserver/mods:code-server-docker|linuxserver/mods:code-server-nodejs
+docker run -p 127.0.0.1:8080:8080 \
+  --name="code-server" codercom/code-server \
+  code-server --auth none
 
 or
 
 https://github.com/LER0ever/EvDev
 
+/Users/gts/Projects/Containers/code-server
+
 docker build -t registry.kc.gs/kc-code --no-cache .
+docker build -t registry.kc.gs/kc-code .
 
-docker run -p 127.0.0.1:8080:8080 -v "${PWD}:/project" --name="kc-code" registry.kc.gs/kc-code code-server --auth none
+docker run -p 127.0.0.1:8080:8080 \
+  --name="kc-code" registry.kc.gs/kc-code \
+  code-server --auth none
 
-docker push registry.kc.gs/portfolio-app
+docker push registry.kc.gs/kc-code
+
+gosu not sudo
+
+alpine:
+docke ps
 
 fc-list | grep "Firicico"
 fc-list | grep "Fira Code Regular Nerd Font Complete"
@@ -31,3 +44,18 @@ coderaiser/cloudcmd
 composer_packages:
   - friendsofphp/php-cs-fixer
   - laravel/installer
+
+
+PUID=1001
+PGID=1001
+TZ=America/New_York
+PASSWORD=Okayden#69
+SUDO_PASSWORD=Okayden#69
+volumes
+  /home/kirk/.config/appdata/code-server:/config
+  /home/kirk/projects:/projects
+
+
+
+COPY --from=vscode-env /root/settings.json /root/.local/share/code-server/User/settings.json
+COPY --from=vscode-env /root/.vscode/extensions /root/.local/share/code-server/extensions

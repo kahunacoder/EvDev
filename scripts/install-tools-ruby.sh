@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo 'Installing ruby w/rbenv and gems...'
-echo "\e[32m######################### Installing RUBY w/RBENV and GLOBAL GEMS #########################\e[0m"
+echo "\e[33m######################### Installing RUBY w/RBENV and GLOBAL GEMS #########################"
 # apt-get update
 # apt-get install -y ruby-full rubygems
 
@@ -10,8 +10,8 @@ apt install -y git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison bui
 
 curl -sL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash -
 
-echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
-echo 'eval "$(rbenv init -)"' >> ~/.zshrc
+# echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
+# echo 'eval "$(rbenv init -)"' >> ~/.zshrc
 source ~/.zshrc
 
 rbenv install 2.5.1
@@ -24,3 +24,4 @@ gem install bundler addressable airbrussh bigdecimal capistrano colorator concur
 
 rbenv rehash
 
+echo "\e[32m######################### RUBY w/RBENV and GLOBAL GEMS INSTALLED #########################\e[0m"
