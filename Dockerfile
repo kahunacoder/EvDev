@@ -71,10 +71,6 @@ RUN sh /home/coder/scripts/install-tools-php.sh
 ## cleanup of files from setup
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# RUN chsh -s /usr/bin/zsh coder
-# RUN	mkdir -p /home/coder/.local/bin
-# RUN chown -R coder:coder /home/coder
-
 ############################# from here when can run as user #############################
 
 USER coder
@@ -84,8 +80,6 @@ COPY --from=vscode-env --chown=coder:coder /home/coder/.local/share/code-server 
 # COPY --from=vscode-env --chown=coder:coder /home/coder/settings.json /home/coder/.local/share/code-server/User/settings.json
 # COPY --from=vscode-env --chown=coder:coder /home/coder/.vscode/extensions /home/coder/.local/share/code-server/extensions
 
-RUN sh /home/coder/scripts/install-tools-composer-globals.sh
-RUN sh /home/coder/scripts/install-tools-yarn-globals.sh
 
 # Locale Generation
 # We unfortunately cannot use update-locale because docker will not use the env variables
@@ -96,6 +90,10 @@ ENV LANG=en_US.UTF-8
 RUN wget https://github.com/ohmyzsh/ohmyzsh/raw/master/tools/install.sh -O - | zsh || true
 COPY --chown=coder:coder ./settings/zshrc /home/coder/.zshrc
 COPY --chown=coder:coder ./settings/zshrc /home/coder/.aliases
+
+RUN sh /home/coder/scripts/install-tools-rubyenv-gems.sh
+RUN sh /home/coder/scripts/install-tools-composer-globals.sh
+RUN sh /home/coder/scripts/install-tools-yarn-globals.sh
 
 EXPOSE 8080
 VOLUME [ "/home/coder/projects" ]
