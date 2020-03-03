@@ -1,0 +1,8 @@
+.github
+.gitignore
+.travis.yml
+LICENSE
+README.md
+codeserver.code-workspace
+__notes.txt
+deploy

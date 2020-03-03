@@ -1,0 +1,5 @@
+user: coder
+group: coder
+paths:
+  - /home/coder
+  - /home/coder/project

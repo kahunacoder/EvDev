@@ -1,0 +1,28 @@
+---
+- name: restart php-fpm
+  service:
+    name: "{{ php_fpm_daemon }}"
+    state: restarted
+  listen: "restart web services"
+
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted
+  listen: "restart web services"
+
+- name: reload php-fpm
+  service:
+    name: "{{ php_fpm_daemon }}"
+    state: reloaded
+  listen: "reload web services"
+
+- name: reload nginx
+  service:
+    name: nginx
+    state: reloaded
+  listen: "reload web services"
+
+- name: validate nginx configuration
+  command: nginx -t -c /etc/nginx/nginx.conf
+  changed_when: False

@@ -1,0 +1,12 @@
+docker build \
+  --build-arg LC_ALL=en_US.UTF-8 \
+  --build-arg LANG=en_US.UTF-8 \
+  --build-arg PUID=1001 \
+  --build-arg PGID=1001 \
+  --build-arg TZ=America/New_York \
+  --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" \
+  --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)" \
+  -t registry.kc.gs/code-tools \
+  .
+
+docker push registry.kc.gs/code-tools

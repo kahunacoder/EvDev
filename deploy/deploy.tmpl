@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: true
+  become: yes
+  vars:
+    ansible_python_interpreter:  /usr/bin/python3
+
+  pre_tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+  roles:
+    - project

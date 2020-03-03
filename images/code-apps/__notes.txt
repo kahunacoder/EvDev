@@ -1,0 +1,10 @@
+docker build \
+  --build-arg LC_ALL=en_US.UTF-8 \
+  --build-arg LANG=en_US.UTF-8 \
+  --build-arg PUID=1001 \
+  --build-arg PGID=1001 \
+  --build-arg TZ=America/New_York \
+  -t registry.kc.gs/code-apps \
+  .
+
+docker push registry.kc.gs/code-apps

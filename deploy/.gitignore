@@ -1,0 +1,5 @@
+.vagrant
+group_vars/all/developer.yml
+group_vars/all/project.yml
+*.retry
+/deploy.yml

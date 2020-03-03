@@ -1,9 +1,9 @@
 #!/bin/bash
 
-echo "\e[33m########################## Installing PHP and COMPOSER ##########################"
+echo "\e[33m########################## Installing PHP and COMPOSER w/$1 TZ ##########################"
 export DEBIAN_FRONTEND=noninteractive
 
-ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+ln -fs /usr/share/zoneinfo/$1 /etc/localtime
 apt-get install -y tzdata
 dpkg-reconfigure --frontend noninteractive tzdata
 

@@ -1,0 +1,75 @@
+---
+- include_vars:
+    file: 'roles/webserver/vars/{{ ansible_os_family }}.yml'
+
+- name: delete project's vhost symlink
+  file:
+    path: "{{ nginx_vhost_path_enabled }}/{{DOMAINS[0]}}.conf"
+    state: absent
+  # notify: reload nginx
+
+- name: delete project's vhost conf
+  file:
+    path: "{{ nginx_vhost_path }}/{{DOMAINS[0]}}.conf"
+    state: absent
+  # notify: reload nginx
+
+- name: delete account's php-fpm symlink
+  file:
+    path: "{{ php_fpm_pool_conf_path }}/php_{{PROJECT_ACCOUNT}}.conf"
+    state: absent
+  when: PROJECT_ACCOUNT_DELETE|default(false)|bool == true
+
+- name: delete account's php-fpm conf
+  file:
+    path: "{{ php_fpm_vhost_conf_file }}/php_{{PROJECT_ACCOUNT}}.conf"
+    state: absent
+  when: PROJECT_ACCOUNT_DELETE|default(false)|bool == true
+
+- name: delete the account's php-fpm sock file
+  file:
+    path: "/var/run/php/{{PROJECT_ACCOUNT}}.sock"
+    state: absent
+  when: PROJECT_ACCOUNT_DELETE|default(false)|bool == true
+
+- name: check if certificate exsits
+  command: "certbot certificates --cert-name {{DOMAINS[0]}}"
+  register: certificates
+
+- name: revoke and delete ssl certificate
+  command: "certbot delete --cert-name {{DOMAINS[0]}}"
+  when: certificates.stdout.find('Certificate Name:') != -1
+
+- name: Kill users running processes and delete user
+  shell: "killall -KILL -u {{PROJECT_ACCOUNT}} ; userdel -fr {{PROJECT_ACCOUNT}}"
+  when: PROJECT_ACCOUNT_DELETE|default(false)|bool == true
+
+# If the project account has more than one project then delete the project folder,
+# repository and logs
+- name: delete project's folder
+  file:
+    path: "{{PROJECT_ROOT}}/{{PROJECT_ACCOUNT}}/{{DOMAINS[0]}}"
+    state: absent
+  when: PROJECT_ACCOUNT_DELETE|default(false)|bool == false
+
+- name: delete project's repository
+  file:
+    path: "{{PROJECT_ROOT}}/{{PROJECT_ACCOUNT}}/repositories/{{PROJECT_NAME}}.git"
+    state: absent
+  when: PROJECT_ACCOUNT_DELETE|default(false)|bool == false
+
+- name: delete project's access log
+  file:
+    path: "{{PROJECT_ROOT}}/{{PROJECT_ACCOUNT}}/logs/access_{{DOMAINS[0]}}.log"
+    state: absent
+  when: PROJECT_ACCOUNT_DELETE|default(false)|bool == false
+
+- name: delete project's error log
+  file:
+    path: "{{PROJECT_ROOT}}/{{PROJECT_ACCOUNT}}/logs/error_{{DOMAINS[0]}}.log"
+    state: absent
+  when: PROJECT_ACCOUNT_DELETE|default(false)|bool == false
+
+- name: reload php and nginx
+  command: echo "this task will reload the web services"
+  notify: "reload web services"

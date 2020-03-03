@@ -1,0 +1,14 @@
+---
+ansible_host: s.kc.gs
+ansible_connection: ssh
+ansible_python_interpreter: /usr/bin/python3
+ansible_ssh_user: kirk
+ansible_ssh_private_key_file: '~/.ssh/id_rsa'
+ansible_sudo_pass: Okayden#69
+
+hostname: "s.kc.gs"
+registry_domain: "registry.kc.gs"
+docker_gui_domain: "portainer.kc.gs"
+jenkins_domain: "jenkins.kc.gs"
+tunnel_domain: "tunnel.kc.gs"
+

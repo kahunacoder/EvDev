@@ -1,0 +1,97 @@
+---
+- name: Create a login user
+  user:
+    name: "{{PROJECT_ACCOUNT}}"
+    password: "{{PROJECT_PASSWORD}}"
+    groups:
+      - www-data
+    state: present
+    shell: "/bin/bash"
+    system: no
+    createhome: yes
+    home: "{{PROJECT_ROOT}}/{{PROJECT_ACCOUNT}}"
+
+- name: Create the PROJECT_ACCOUNT .ssh directory
+  file:
+    path={{PROJECT_ROOT}}/{{PROJECT_ACCOUNT}}/.ssh
+    mode=700
+    owner={{PROJECT_ACCOUNT}}
+    group={{PROJECT_ACCOUNT}}
+    state=directory
+  become: true
+  become_user: "{{PROJECT_ACCOUNT}}"
+  tags: [user,ssh]
+
+- name: Copy the developer's Project's SSH public key file
+  copy:
+    src={{PROJECT_KEY_PATH}}{{PROJECT_PUB_KEY}}
+    dest={{PROJECT_ROOT}}/{{PROJECT_ACCOUNT}}/.ssh/{{PROJECT_PUB_KEY}}
+    mode=0644
+    owner={{PROJECT_ACCOUNT}}
+    group={{PROJECT_ACCOUNT}}
+  become: true
+  become_user: "{{PROJECT_ACCOUNT}}"
+
+- name: Copy the developer's Project's SSH private key file
+  copy:
+    src={{PROJECT_KEY_PATH}}{{PROJECT_PRIVATE_KEY}}
+    dest={{PROJECT_ROOT}}/{{PROJECT_ACCOUNT}}/.ssh/{{PROJECT_PRIVATE_KEY}}
+    mode=0600
+    owner={{PROJECT_ACCOUNT}}
+    group={{PROJECT_ACCOUNT}}
+  become: true
+  become_user: "{{PROJECT_ACCOUNT}}"
+
+- name: Create the project directory
+  file:
+    path={{PROJECT_ROOT}}/{{PROJECT_ACCOUNT}}/{{ DOMAINS | first }}
+    mode=775
+    owner={{PROJECT_ACCOUNT}}
+    group={{PROJECT_ACCOUNT}}
+    state=directory
+  become: true
+  become_user: "{{PROJECT_ACCOUNT}}"
+  tags: [user]
+
+- name: Create the DOCKER_ROOT folder
+  file:
+    path={{PROJECT_ROOT}}/{{PROJECT_ACCOUNT}}/{{ DOMAINS | first }}/{{ DOCKER_ROOT }}/
+    mode=775
+    owner={{PROJECT_ACCOUNT}}
+    group={{PROJECT_ACCOUNT}}
+    state=directory
+  become: true
+  become_user: "{{PROJECT_ACCOUNT}}"
+
+- name: Create the DOCKER_ROOT/log folder
+  file:
+    path={{PROJECT_ROOT}}/{{PROJECT_ACCOUNT}}/{{ DOMAINS | first }}/{{ DOCKER_ROOT }}/log
+    mode=775
+    owner={{PROJECT_ACCOUNT}}
+    group={{PROJECT_ACCOUNT}}
+    state=directory
+  become: true
+  become_user: "{{PROJECT_ACCOUNT}}"
+
+- name: Create the DOCKER_ROOT/conf folder
+  file:
+    path={{PROJECT_ROOT}}/{{PROJECT_ACCOUNT}}/{{ DOMAINS | first }}/{{ DOCKER_ROOT }}/conf
+    mode=775
+    owner={{PROJECT_ACCOUNT}}
+    group={{PROJECT_ACCOUNT}}
+    state=directory
+  become: true
+  become_user: "{{PROJECT_ACCOUNT}}"
+
+
+- name: Create docker-compose.yml file
+  template:
+    src=docker-compose.yml.j2
+    dest={{PROJECT_ROOT}}/{{PROJECT_ACCOUNT}}/{{  DOMAINS | first  }}/{{ DOCKER_ROOT }}/docker-compose.yml
+  become: true
+  become_user: "{{PROJECT_ACCOUNT}}"
+
+
+- name: run docker-compose up -d
+  shell: "cd {{PROJECT_ROOT}}/{{PROJECT_ACCOUNT}}/{{  DOMAINS | first  }}/{{ DOCKER_ROOT }}/ && docker-compose up -d"
+  become: true

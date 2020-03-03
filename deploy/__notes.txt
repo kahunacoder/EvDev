@@ -1,0 +1,12 @@
+    {% if ansible_user != 'vagrant' %}
+      - LETSENCRYPT_HOST={{ DOMAINS | join(',') }}
+      - LETSENCRYPT_EMAIL={{ PROJECT_EMAIL }}
+    {% endif %}
+    {% if ansible_user != 'vagrant' %}
+    healthcheck:
+      test: curl --fail -s https://{{ DOMAINS | first }}/ || exit 1
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+    {% endif %}
+

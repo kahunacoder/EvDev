@@ -1,0 +1,49 @@
+---
+############# PROJECT SETTINGS #############
+
+PROJECT_NAME: laravel
+PROJECT_EMAIL: bk@kc.gs
+
+# PROJECT_ROOT is the root account the project will be placed in
+# use a slash at the beginning of the name
+PROJECT_ROOT: /home
+
+# PROJECT_ACCOUNT is the account the project will be placed in
+PROJECT_ACCOUNT: laravel
+
+# if PROJECT_ACCOUNT_DELETE is set to true when the delete playbook is run it will delete the
+# PROJECT_ACCOUNT user and directory
+PROJECT_ACCOUNT_DELETE: true
+
+# Use mkpasswd --method=sha-512
+# to install mkpasswd on Macs use sudo gem install mkpasswd
+PROJECT_PASSWORD: "$6$9LlRhkPWWPx7L11D$YWUwUccO6uzGcBUHTyp1J4ZhaOIKKld5Y26eZ56wT403ihISyt6oio9SRn.f0lf.Buarxnxel/KkWdJlTAm7K/"
+
+############# WEBSERVER SETTINGS #############
+
+# These are the domains to use for the project, secure cetificates will be enabled for these domains.
+# The first domain will be used to name configuration and log files
+DOMAINS:
+  - portfolio.cac
+  - l.s.kc.gs
+  - laravel.s.kc.gs
+
+# Rediret from these domain name
+# REDIRECT_FROM:
+#   - www.kahunacoder.com
+#   - p.kc.gs
+
+# Rediret to this domain name
+# REDIRECT_TO: portfolio.kahunacoder.com
+
+DOCKER_ROOT: docker
+
+registry: 127.0.0.1:5000
+image: portfolio-app
+container: portfolio-web
+
+
+# Custom web server headers.
+HEADERS:
+  - 'add_header  X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";'
+

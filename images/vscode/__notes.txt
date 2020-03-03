@@ -1,0 +1,8 @@
+docker build \
+  --build-arg PUID=1001 \
+  --build-arg PGID=1001 \
+  -t registry.kc.gs/vscode \
+  --no-cache \
+  .
+
+docker push registry.kc.gs/code-tools

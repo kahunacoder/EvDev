@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  coder:
+    # image: registry.kc.gs/kc-code
+    build: .
+    container_name: kc-code
+    network: code-server
+    volumes:
+      - "/home/kirk/projects:/home/coder/projects"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    expose:
+      - "8080"
+    env:
+      PASSWORD=Okayden#69
+      SUDO_PASSWORD=Okayden#69
+      VIRTUAL_HOST=editor.kahunacoder.com,code.kahunacoder.com,code.kc.gs
+      VIRTUAL_NETWORK=nginx-proxy
+      LETSENCRYPT_HOST=editor.kahunacoder.com,code.kahunacoder.com,code.kc.gs
+      LETSENCRYPT_EMAIL=code@kc.gs
+
+networks:
+  code-server:

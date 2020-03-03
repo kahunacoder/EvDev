@@ -12,11 +12,51 @@ https://github.com/LER0ever/EvDev
 
 docker build -t registry.kc.gs/kc-code --no-cache .
 docker build -t registry.kc.gs/kc-code .
+docker push registry.kc.gs/vscode
+docker push registry.kc.gs/code-tools
+docker push registry.kc.gs/code-apps
+docker push registry.kc.gs/kc-code
+
+docker volume create somevolumename
+docker run -v name:/path/in/container ...
+
+docker image inspect registry.kc.gs/kc-code
+docker image history registry.kc.gs/kc-code
+
+docker network create code-server
+  --network code-server \
+
+docker build \
+  -t registry.kc.gs/kc-code \
+  --no-cache \
+  .
+
+  -e VIRTUAL_HOST=editor.kahunacoder.com,code.kahunacoder.com,code.kc.gs,editor.kc.gs \
+  -e VIRTUAL_NETWORK=nginx-proxy \
+  -e LETSENCRYPT_HOST=editor.kahunacoder.com,code.kahunacoder.com,code.kc.gs,editor.kc.gs \
+  -e LETSENCRYPT_EMAIL=code@kc.gs \
+
+code.coding.editor.
+
+  --volume /Users/gts/Projects:/home/coder/projects \
+
 
 docker run -p 127.0.0.1:8080:8080 \
-  --name="kc-code" registry.kc.gs/kc-code \
-  code-server --auth none
+  -e LC_ALL=en_US.UTF-8 \
+  -e PASSWORD=Okayden#6969 \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  --hostname="kc-code" \
+  --name="kc-code" registry.kc.gs/kc-code
 
+github token:
+
+
+  code-server
+
+docker-compose up -d
+Checking for rbenv shims in PATH: not found
+  The directory `/home/coder/.rbenv/shims' must be present in PATH for rbenv to work.
+  Please run `rbenv init' and follow the instructions.
 docker push registry.kc.gs/kc-code
 
 gosu not sudo
@@ -45,16 +85,14 @@ composer_packages:
   - friendsofphp/php-cs-fixer
   - laravel/installer
 
-
 PUID=1001
 PGID=1001
 TZ=America/New_York
-PASSWORD=Okayden#69
-SUDO_PASSWORD=Okayden#69
 volumes
   /home/kirk/.config/appdata/code-server:/config
   /home/kirk/projects:/projects
-
+  /var/run/docker.sock:/var/run/docker.sock
+--network code-server
 
 
 COPY --from=vscode-env /root/settings.json /root/.local/share/code-server/User/settings.json

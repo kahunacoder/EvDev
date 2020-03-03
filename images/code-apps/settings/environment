@@ -2,3 +2,5 @@ LC_ALL=en_US.UTF-8
 PUID=1001
 PGID=1001
 TZ=America/New_York
+PASSWORD=Okayden#69
+SUDO_PASSWORD=Okayden#69

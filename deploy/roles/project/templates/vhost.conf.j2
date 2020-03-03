@@ -1,0 +1,15 @@
+{% block server_name_redirect_to %}
+{% if item.server_name_redirect_to is defined %}
+server {
+    listen       {{ item.listen | default('80') }};
+    {% if REDIRECT_FROM is defined %}
+        server_name {{ REDIRECT_FROM | join(' ') }};
+    {% endif %}
+    return       301 $scheme://{{ item.server_name_redirect_to }}$request_uri;
+}
+{% endif %}
+{% endblock %}
+
+{% if DOMAINS is defined %}
+    server_name {{ DOMAINS | join(' ') }};
+{% endif %}
